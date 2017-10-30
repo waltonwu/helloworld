@@ -11,7 +11,6 @@ Spring缓存底层也是需要借助其他缓存工具来实现，例如EhCache(
     3.配置缓存管理器，不同的缓存实现配置不同，如果是EhCache，需要先配置一个ehcache.xml
 
 例如
-复制代码
 
  1 <?xml version="1.0" encoding="UTF-8"?>
  2 <ehcache>
@@ -34,12 +33,9 @@ Spring缓存底层也是需要借助其他缓存工具来实现，例如EhCache(
 19         timeToLiveSeconds="600" />
 20 </ehcache>
 
-复制代码
-
 上面的ehcache.xml配置了两个缓存区，Spring中的Bean将会缓存在这些缓存区中，一般的，Spring容器中有多少个Bean，就会在ehcache中定义多少个缓存区。
 
 接着在Spring配置文件中配置缓存管理器如下，其中第一个Bean是一个工厂Bean，用来配置EhCache的CacheManager, 第二个Bean才是为Spring缓存配置的缓存管理器，所以将第一个Bean注入第二个Bean。
-复制代码
 
  1     <cache:annotation-driven cache-manager="cacheManager" />
  2 
@@ -56,12 +52,10 @@ Spring缓存底层也是需要借助其他缓存工具来实现，例如EhCache(
 13         p:cacheManager-ref="ehCacheManager" > 
 14     </bean>
 
-复制代码
 
  
 
 下面是一个完整的Spring配置，
-复制代码
 
  1 <?xml version="1.0" encoding="UTF-8"?>
  2 <beans xmlns="http://www.springframework.org/schema/beans"
@@ -123,14 +117,13 @@ Spring缓存底层也是需要借助其他缓存工具来实现，例如EhCache(
 15     }
 16 }
 
-复制代码
 
  
 
 基于类的缓存，将会缓存类中的所有方法，缓存之后，程序调用该类实例的任何方法，只要传入的参数相同，Spring将不会真正执行该方法，而是直接根据传入的参数去查找缓存中的数据！
 
 比如像下面这样使用缓存数据，
-复制代码
+
 
 1     public static void test2() {
 2         ApplicationContext ctx = new ClassPathXmlApplicationContext("beans.xml");
@@ -142,7 +135,6 @@ Spring缓存底层也是需要借助其他缓存工具来实现，例如EhCache(
 8         System.out.println(u1==u2);
 9     }
 
-复制代码
 
  
 
@@ -160,7 +152,6 @@ Spring缓存底层也是需要借助其他缓存工具来实现，例如EhCache(
 当然我们也可以修改key的策略，让Spring按照其他标准，比如按照第一个参数是否相同来作为key，在缓存中查找结果。
 
 将上面的Bean类修改如下，
-复制代码
 
 1 @Service("userService")
 2 @Cacheable(value="users", key="#name")
