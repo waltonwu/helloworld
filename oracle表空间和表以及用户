@@ -142,4 +142,4 @@ CREATE USER nc
 impdp wds/narisq@127.0.0.1:1521/ORCL dumpfile=d:\wds.dpdmp
 
 cmd控制台输入
-impdp wds/narisq@127.0.0.1:1521/ORCL dumpfile=d:\wds.dpdmp
+exp wds/narisq@127.0.0.1:1521/ORCL dumpfile=d:\wds.dpdmp
