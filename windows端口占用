@@ -1,2 +1,0 @@
-在cmd命令行中输入 netstat  -ano |findstr 8080
-然后输入：taskkill  /pid 4884 /f   
